@@ -5,10 +5,7 @@ const btnYes = document.querySelector(".btn-yes");
 const btnNo = document.querySelector(".btn-no");
 
 function getRandomNumber(min, max) {
-  // Calculate the random number between min and max (inclusive)
-  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-
-  return randomNumber;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 btnNo.addEventListener("click", (event) => {
@@ -16,19 +13,12 @@ btnNo.addEventListener("click", (event) => {
   const containerWidth = container.getBoundingClientRect().width;
   const btnHeight = btnNo.getBoundingClientRect().height;
   const btnWidth = btnNo.getBoundingClientRect().width;
-  const btnTop = btnNo.getBoundingClientRect().top;
-  const btnLeft = btnNo.getBoundingClientRect().left;
 
-  let newTop = btnTop;
-  let newLeft = btnLeft;
-  while (Math.abs(newTop - btnTop) < containerHeight / 3) {
-    newTop = getRandomNumber(0, containerHeight - btnHeight);
-  }
+  // Get random positions
+  let newTop = getRandomNumber(0, containerHeight - btnHeight);
+  let newLeft = getRandomNumber(0, containerWidth - btnWidth);
 
-  while (Math.abs(newLeft - btnLeft) < containerWidth / 3) {
-    newLeft = getRandomNumber(0, containerWidth - btnWidth);
-  }
-
+  // Apply new positions
   btnNo.style.top = Math.floor(newTop) + "px";
   btnNo.style.left = Math.floor(newLeft) + "px";
 });
